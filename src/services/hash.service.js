@@ -1,14 +1,14 @@
-import * as bcrypt from 'bcrypt'
+const bcrypt = require('bcrypt');
 
 const saltRounds = 12;
 
-export const hash = async (value) => {
+exports.hash = async (value) => {
     const hashed = await bcrypt.hash(value, saltRounds);
 
     return hashed;
 }
 
-export const check = async (value, hashed) => {
+exports.check = async (value, hashed) => {
     const isMatch = await bcrypt.compare(value, hashed);
 
     return isMatch;

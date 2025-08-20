@@ -1,4 +1,4 @@
-import { Pool } from 'pg'
+const { Pool } = require('pg')
 
 const pool = new Pool({
     host: process.env.DB_HOST || 'localhost',
@@ -12,6 +12,10 @@ const pool = new Pool({
     // maxLifetimeSeconds: 60
 })
 
-export const query = async (text, params) => {
+exports.query = async (text, params) => {
     return pool.query(text, params)
+}
+
+exports.end = async () => {
+    return pool.end()
 }

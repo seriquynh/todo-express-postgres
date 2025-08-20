@@ -1,4 +1,4 @@
-export function transformValidationErrors(errors) {
+exports.transformValidationErrors = (errors) => {
     return {
         message: 'Validation failed',
         errors: errors.array().map(error => ({
