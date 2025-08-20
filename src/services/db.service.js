@@ -12,6 +12,6 @@ const pool = new Pool({
     // maxLifetimeSeconds: 60
 })
 
-export const query = (text, params) => {
+export const query = async (text, params) => {
     return pool.query(text, params)
 }
