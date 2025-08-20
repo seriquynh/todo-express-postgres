@@ -43,6 +43,10 @@ exports.loginRules = () => {
         body('email', 'The email field must be required.').not().isEmpty(),
         body('email', 'The email field must be a valid email address.').isEmail(),
         body('email').custom(async value => {
+            if (value === undefined || value == '') {
+                return;
+            }
+
             const result = await db.query(`SELECT * FROM users WHERE email = $1`, [value])
 
             if (result.rowCount == 0) {
@@ -69,7 +73,7 @@ exports.login = async (req, res) => {
 
     if (!(await hash.check(password, user.password))) {
         return res.status(401).json({
-            message: 'Invalid credentials.'
+            message: 'Incorrect credentials.'
         });
     }
 
