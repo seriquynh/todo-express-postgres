@@ -16,6 +16,10 @@ exports.query = async (text, params) => {
     return pool.query(text, params)
 }
 
+exports.resetDatabase = async () => {
+    await pool.query(`DELETE FROM users WHERE true`);
+}
+
 exports.end = async () => {
     return pool.end()
 }

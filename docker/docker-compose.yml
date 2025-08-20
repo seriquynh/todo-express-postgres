@@ -26,6 +26,17 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  postgres_test:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-todo_db_test}
+    ports:
+      - "${POSTGRES_PORT:-5433}:5432"
+    networks:
+      - todo-network
+
 volumes:
   postgres_data:
     driver: local
