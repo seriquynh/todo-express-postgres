@@ -1,0 +1,35 @@
+name: todo-express-postgres
+
+services:
+  # api:
+  #   image: node:22
+  #   user: www-data
+  #   command: npm run dev
+  #   ports:
+  #     - "${APP_PORT:-3000}:3000"
+  #   networks:
+  #     - todo-network
+  #   volumes:
+  #     - ../:/usr/src/app
+  #   working_dir: /usr/src/app
+
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-todo_db}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    networks:
+      - todo-network
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  todo-network:
+    driver: bridge
