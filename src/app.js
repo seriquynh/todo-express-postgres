@@ -12,14 +12,8 @@ else {
 
 app.use(express.json());
 
-const authRoutes = require('./routes/auth.route');
-
-app.use('/api/', authRoutes)
-
-app.get('/', (req, res) => {
-  res.json({
-    message: 'Todo REST API by Express & PostgreSQL',
-  });
-});
+app.use('/', require('./routes/common.route'))
+app.use('/api/', require('./routes/auth.route'))
+app.use('/api/', require('./routes/board.route'))
 
 module.exports = app;
