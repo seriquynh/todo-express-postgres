@@ -36,10 +36,13 @@ exports.storeAction = async (req, res) => {
 
     await db.query('INSERT INTO boards (name, user_id) VALUES ($1, $2)', [name, req.user.id]);
 
+    const result = await db.query('SELECT * FROM boards WHERE user_id = $1 AND name = $2 ORDER BY id DESC LIMIT 1', [req.user.id, name])
+
     res.status(201).json({
         data: {
-            name,
-            user_id: req.user.id,
+            id: result.rows[0].id,
+            name: result.rows[0].name,
+            user_id: result.rows[0].user_id,
         },
     })
 }
@@ -49,6 +52,7 @@ exports.showAction = async (req, res) => {
         data: {
             id: req.board.id,
             name: req.board.name,
+            user_id: req.board.user_id,
         },
     })
 }
@@ -78,6 +82,7 @@ exports.updateAction = async (req, res) => {
         data: {
             id: req.board.id,
             name,
+            user_id: req.board.user_id,
         }
     })
 }

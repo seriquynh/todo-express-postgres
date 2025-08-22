@@ -5,11 +5,11 @@ const hash = require("../../src/services/hash.service");
 const { extractErrorMessages } = require("../../src/utils/testing.util");
 
 afterAll(async () => {
-    db.end();
+    await db.end();
 });
 
 beforeEach(async () => {
-    db.resetDatabase();
+    await db.resetDatabase();
 });
 
 describe("POST /api/login", () => {

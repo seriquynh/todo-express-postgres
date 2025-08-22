@@ -7,7 +7,8 @@
     "migrate": "node-pg-migrate",
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
-    "test": "jest"
+    "test": "jest --runInBand",
+    "test-verbose": "jest --runInBand --verbose"
   },
   "author": "",
   "license": "MIT",
