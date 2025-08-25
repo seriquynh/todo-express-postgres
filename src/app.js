@@ -12,9 +12,13 @@ else {
 
 app.use(express.json());
 
-app.use('/', require('./routes/common.route'))
+app.get('/up', (req, res) => {
+  res.json({
+    message: 'Todo REST API by Express & PostgreSQL',
+  });
+});
+
 app.use('/api/', require('./routes/auth.route'))
-app.use('/api/', require('./routes/board.route'))
-app.use('/api/', require('./routes/api.route'))
+app.use('/api/', require('./routes/resource.route'))
 
 module.exports = app;

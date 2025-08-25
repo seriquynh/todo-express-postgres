@@ -1,6 +1,6 @@
 const db = require('../services/db.service');
 
-exports.factory = (table, paramName = 'id') => {
+exports.make = (table, paramName = 'id') => {
     return async (req, res, next) => {
         const id = parseInt(req.params[paramName])
 
@@ -12,7 +12,7 @@ exports.factory = (table, paramName = 'id') => {
             })
         }
 
-        req.board = result.rows[0]
+        req[paramName] = result.rows[0]
 
         next();
     }
